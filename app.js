@@ -1,6 +1,8 @@
 import { getUser, signOut } from './services/auth-service.js';
 import { protectPage } from './utils.js';
 import createUser from './components/User.js';
+//import handler functions written by me
+import createAddItem from './components/AddItem.js';
 
 // State
 let user = null;
@@ -22,6 +24,9 @@ const User = createUser(
     document.querySelector('#user'),
     { handleSignOut }
 );
+//Write CRUD functions
+
+
 
 function display() {
     User({ user });
