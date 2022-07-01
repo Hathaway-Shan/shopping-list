@@ -1,0 +1,4 @@
+.list li.bought label {
+    color: #949494;
+    text-decoration: line-through;
+}

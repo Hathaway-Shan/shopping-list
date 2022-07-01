@@ -4,7 +4,8 @@ import createUser from './components/User.js';
 //import handler functions written by me
 import createAddItem from './components/AddItem.js';
 import { getAllItems, createItem, updateItem, deleteItem } from './services/item-services.js';
-import createShoppingList from './components/shoppingList.js'
+import createShoppingList from './components/shoppingList.js';
+import createBuildShoppingList from './components/buildShoppingList.js';
 
 // State
 let user = null;
@@ -34,8 +35,16 @@ async function handleCreate(item) {
     display();
 }
 
+//handler functions made by Marty
 async function handleSignOut() {
     signOut();
+}
+
+//handler functions made by me
+async function handleBought(item) {
+    item.bought = !item.bought;
+    await updateItem(item);
+    display();
 }
 
 // Components made by Marty
@@ -44,12 +53,16 @@ const User = createUser(
     { handleSignOut }
 );
 //Components made by me
-//create new variable that is a query selector targeting the HTML element for the new item and call handleCreate resume here with Dave or TA in morning
+//create new variable that is a query selector targeting the HTML element for the new item and call handleCreate 
 const shoppingList = createShoppingList(document.querySelector('form'), { handleCreate });
+
+const BuildShoppingList = createBuildShoppingList(document.querySelector('.list'));
+
 
 function display() {
     User({ user });
     shoppingList({ items });
+    BuildShoppingList({ items });
 }
 
 handlePageLoad();
