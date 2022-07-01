@@ -6,21 +6,22 @@ export default function createListItems(root, {
 
         for (const item of items) {
             const li = buyItem(item, { handleBought });
-
+            li.textContent = `${item.item} ${item.quantity}`;
             root.append(li);
         }
     };
 }
 
 function buyItem(item, { handleBought }) {
-
+    const li = document.createElement('li');
     li.addEventListener('dblclick', () => {
-        item.bought === true;
+
         handleBought(item);
     });
 
     if (item.bought) {
         li.classList.add('bought');
     }
+    return li;
 }
 

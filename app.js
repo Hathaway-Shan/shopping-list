@@ -28,7 +28,7 @@ async function handleCreate(item) {
         user_id: user.id,
     };
     const data = await createItem(itemToAdd);
-    console.log(itemToAdd, itemToAdd.item, user.id);
+
     //this form data object is pushed into the items array
     items.push(data);
     //update display
@@ -42,8 +42,22 @@ async function handleSignOut() {
 
 //handler functions made by me
 async function handleBought(item) {
-    item.bought = !item.bought;
-    await updateItem(item);
+
+    //we need to target the right item in the index of the array of items that's what this is for
+    const index = items.indexOf(item);
+
+    if (item.bought) {
+        item.bought = false;
+    }
+    else {
+        item.bought = true;
+    }
+
+
+    const boughtItem = await updateItem(item);
+
+    items[index] = boughtItem;
+
     display();
 }
 
@@ -56,7 +70,7 @@ const User = createUser(
 //create new variable that is a query selector targeting the HTML element for the new item and call handleCreate 
 const shoppingList = createShoppingList(document.querySelector('form'), { handleCreate });
 
-const BuildShoppingList = createBuildShoppingList(document.querySelector('.list'));
+const BuildShoppingList = createBuildShoppingList(document.querySelector('.list'), { handleBought });
 
 
 function display() {

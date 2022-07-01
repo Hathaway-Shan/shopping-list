@@ -16,7 +16,7 @@ export async function createItem(item) {
 
 export async function updateItem(item) {
     //update a given item in the users table
-    const response = await client.from('Table_Primus').update('item').match({ id: item.id }).select();
+    const response = await client.from('Table_Primus').update(item).match({ id: item.id }).select();
 
     return response.data;
 }
