@@ -2,7 +2,6 @@ import { getUser, signOut } from './services/auth-service.js';
 import { protectPage } from './utils.js';
 import createUser from './components/User.js';
 //import handler functions written by me
-import createAddItem from './components/AddItem.js';
 import { getAllItems, createItem, updateItem, deleteItem } from './services/item-services.js';
 import createShoppingList from './components/shoppingList.js';
 import createBuildShoppingList from './components/buildShoppingList.js';
@@ -61,6 +60,12 @@ async function handleBought(item) {
     display();
 }
 
+async function handleDelete(user) {
+    await deleteItem(user);
+    items = [];
+    display();
+}
+
 // Components made by Marty
 const User = createUser(
     document.querySelector('#user'),
@@ -70,7 +75,8 @@ const User = createUser(
 //create new variable that is a query selector targeting the HTML element for the new item and call handleCreate 
 const shoppingList = createShoppingList(document.querySelector('form'), { handleCreate });
 
-const BuildShoppingList = createBuildShoppingList(document.querySelector('.list'), { handleBought });
+//in order for functions to not be read null in buildShoppingList we have to give it the function as an object out here. the function runs out here but is accessible in there.
+const BuildShoppingList = createBuildShoppingList(document.querySelector('.list'), { handleBought, handleDelete });
 
 
 function display() {
