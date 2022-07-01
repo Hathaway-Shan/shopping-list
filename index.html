@@ -20,15 +20,36 @@
 <body>
     <header>
         <img src="./assets/html_css_js.png">
-        <h1>Cool Web App</h1>
+        <h1>It's List-o-clock! (not the composer)</h1>
         <div id="user"></div>
     </header>
 
     <main>
+        <section>
+            <p>Double click items as you buy them to cross them off.</p>
+            <!-- form for adding new items and quantities -->
+            <form class="item-form" id="form" name="form">
+                <label>
+                    Item:
+                    <input name="item" />
+                </label>
+
+                <label>
+                    Quantity:
+                    <input type="number" name="quantity" min="0" />
+                </label>
+                <!-- aim adding logic at this button -->
+                <button class="add">Add Item</button>
+            </form>
+            <!-- list to display items added to the table -->
+            <ul class="list">
+
+            </ul>
+            <!-- aim delete logic at this button -->
+            <button class="delete">Delete List</button>
+        </section>
 
     </main>
-
-    <footer>&copy;2022 Aspiring Software Developer</footer>
 
     <script type="module" src="app.js"></script>
 </body>
